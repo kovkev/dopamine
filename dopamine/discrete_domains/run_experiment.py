@@ -111,6 +111,11 @@ def create_agent(sess, environment, agent_name=None, summary_writer=None,
     return jax_implicit_quantile_agent.JaxImplicitQuantileAgent(
         num_actions=environment.action_space.n,
         summary_writer=summary_writer)
+  elif agent_name == 'transformer':
+    from transformers import TFAutoModelForSeq2SeqLM, DataCollatorForSeq2Seq
+    another_model = TFAutoModelForSeq2SeqLM.from_pretrained("t5-small")
+    print(">>>>>>>Successfully loaded model")
+    return object()
   else:
     raise ValueError('Unknown agent: {}'.format(agent_name))
 
